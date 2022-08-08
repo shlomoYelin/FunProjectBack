@@ -16,13 +16,13 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
 {
     public class GetAllCustomersMethodTests
     {
-        private readonly Mock<ILoggerAdapter<CustomersService>> _logger;
+        private readonly Mock<ILoggerAdapter<ProductsService>> _logger;
         private readonly Mock<IMapperAdapter> _mapper;
         private readonly Mock<IAllCustomersQuery> _allCustomersQuery;
 
         public GetAllCustomersMethodTests()
         {
-            _logger = new Mock<ILoggerAdapter<CustomersService>>();
+            _logger = new Mock<ILoggerAdapter<ProductsService>>();
             _logger.Setup(x => x.LogInformation(It.IsAny<string>()));
 
             _mapper = new Mock<IMapperAdapter>();
@@ -35,7 +35,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
         [Fact]
         public async Task GetAllCustomers_NoCustomersShouldReturnEmptyListAsync()
         {
-            var sut = new CustomersService(_logger.Object, _mapper.Object, null, _allCustomersQuery.Object, null, null);
+            var sut = new CustomersService(_logger.Object, _mapper.Object, null, _allCustomersQuery.Object, null, null,null);
 
             var result = await sut.GetAllCustomers();
 
@@ -45,7 +45,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
         [Fact]
         public async Task GetAllCustomers_LogInformation_WhenMethodWasCalledAsync()
         {
-            var sut = new CustomersService(_logger.Object, _mapper.Object, null, _allCustomersQuery.Object, null, null);
+            var sut = new CustomersService(_logger.Object, _mapper.Object, null, _allCustomersQuery.Object, null, null,null);
 
             await sut.GetAllCustomers();
 
@@ -69,7 +69,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
             _mapper.Setup(x => x.Map<IList<CustomerDto>>(customersList)).Returns(customerDtoList);
             _allCustomersQuery.Setup(x => x.Get()).ReturnsAsync(customersList);
 
-            var sut = new CustomersService(_logger.Object, _mapper.Object, null, _allCustomersQuery.Object, null, null);
+            var sut = new CustomersService(_logger.Object, _mapper.Object, null, _allCustomersQuery.Object, null, null,null);
 
             var result = await sut.GetAllCustomers();
 
@@ -82,7 +82,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
         [Fact]
         public async Task GetAllCustomers_AllCustomersQuery_Get_ShouldBeInvoked()
         {
-            var sut = new CustomersService(_logger.Object, _mapper.Object, null, _allCustomersQuery.Object, null, null);
+            var sut = new CustomersService(_logger.Object, _mapper.Object, null, _allCustomersQuery.Object, null, null,null);
 
             await sut.GetAllCustomers();
 
@@ -92,7 +92,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
         [Fact]
         public async Task GetAllCustomers_AllCustomersQuery_Get_ResultShouldBeMappedFromCustomerListToCustomerDtoList()
         {
-            var sut = new CustomersService(_logger.Object, _mapper.Object, null, _allCustomersQuery.Object, null, null);
+            var sut = new CustomersService(_logger.Object, _mapper.Object, null, _allCustomersQuery.Object, null, null,null);
 
             await sut.GetAllCustomers();
 
@@ -105,7 +105,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
             _logger.Setup(x => x.LogError(It.IsAny<Exception>(), It.IsAny<string>()));
             _allCustomersQuery.Setup(x => x.Get()).Throws(new Exception());
 
-            var sut = new CustomersService(_logger.Object, _mapper.Object, null, _allCustomersQuery.Object, null, null);
+            var sut = new CustomersService(_logger.Object, _mapper.Object, null, _allCustomersQuery.Object, null, null,null);
 
             var ex = await ThrowsAsync<Exception>(() => sut.GetAllCustomers());
             _logger.Verify(x => x.LogError(ex, "Method GetAllCustomers failed."), Times.Once);

@@ -18,34 +18,38 @@ namespace FunProject.Persistence
 
         public async Task SeedDataAsync()
         {
-            _appDbContext.Customers.Add(new Customer
+            _ = _appDbContext.Customers.Add(new Customer
             {
                 Id = 1,
-                FirstName = "Donald",
-                LastName = "Trump"
-            });
-
-            _appDbContext.ActivityLogs.Add(new ActivityLog
-            {
-                Id = 1,
-                CustomerId = 1,
                 FirstName = "Donald",
                 LastName = "Trump",
+                Type = 1
+            });
+
+            _ = _appDbContext.ActivityLogs.Add(new ActivityLog
+            {
+                Id = 1,
+                Message = "",
                 ActivityDate = new DateTime(2016, 11, 9),
                 ActionType = ActionType.Create,
             });
 
-            _appDbContext.ActivityLogs.Add(new ActivityLog
+            _ = _appDbContext.ActivityLogs.Add(new ActivityLog
             {
                 Id = 2,
-                CustomerId = 1,
-                FirstName = "Donald",
-                LastName = "Trump",
+                Message = "",
                 ActivityDate = new DateTime(2020, 11, 3),
                 ActionType = ActionType.Update,
             });
 
-            await _appDbContext.SaveChangesAsync();
+            _ = _appDbContext.Products.Add(new Product()
+            {
+                Id = 0,
+                Description = "milke",
+                Price = 5.5F
+            });
+
+            _ = await _appDbContext.SaveChangesAsync();
         }
 
         public void Dispose()

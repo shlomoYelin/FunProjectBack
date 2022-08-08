@@ -11,10 +11,14 @@ namespace FunProject.Persistence
         
         public DbSet<Customer> Customers { get; set; }
         public DbSet<ActivityLog> ActivityLogs { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductOrder> ProductOrders { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            _ = modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

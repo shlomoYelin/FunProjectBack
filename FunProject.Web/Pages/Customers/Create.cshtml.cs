@@ -1,17 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using FunProject.Application.CustomersModule.Dtos;
-using FunProject.Application.CustomersModule.Services.Interfaces;
+using FunProject.Application.ActivityLogModule.Services.Interfaces;
 
 namespace FunProject.Web.Pages.Customers
 {
     public class CreateModel : PageModel
     {
-        private readonly ICustomersService _customersService;
+        private readonly IProductsService _customersService;
+        private readonly IActivityLogService _activityLogService;
 
-        public CreateModel(ICustomersService customersService)
+        public CreateModel(IProductsService customersService , IActivityLogService activityLogService)
         {
             _customersService = customersService;
+            _activityLogService = activityLogService;
         }
 
         public IActionResult OnGet()
@@ -22,14 +24,14 @@ namespace FunProject.Web.Pages.Customers
         [BindProperty]
         public CustomerDto Customer { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+        public  IActionResult OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            await _customersService.CreateCustomer(Customer);
+            _customersService.CreateCustomer(Customer);
 
             return RedirectToPage("./Index");
         }

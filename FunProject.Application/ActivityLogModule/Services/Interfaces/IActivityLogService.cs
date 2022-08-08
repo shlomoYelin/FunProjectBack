@@ -7,5 +7,6 @@ namespace FunProject.Application.ActivityLogModule.Services.Interfaces
     public interface IActivityLogService
     {
         Task<IList<ActivityLogDto>> GetAllActivityLogs();
+        Task<ActivityLogDto> CreateActivityLog(string Message, Domain.Enums.ActionType actionType);
     }
 }

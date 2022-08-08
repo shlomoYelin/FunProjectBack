@@ -1,30 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using FunProject.Application.CustomersModule.Services.Interfaces;
 using FunProject.Application.CustomersModule.Dtos;
+using FunProject.Application.ActivityLogModule.Services.Interfaces;
 
 namespace FunProject.Web.Pages.Customers
 {
     public class DeleteModel : PageModel
     {
-        private readonly ICustomersService _customersService;
+        private readonly IProductsService _customersService;
+        private readonly IActivityLogService _activityLogService;
 
-        public DeleteModel(ICustomersService customersService)
+
+        public DeleteModel(IProductsService customersService , IActivityLogService activityLogService)
         {
             _customersService = customersService;
+            _activityLogService = activityLogService;
         }
 
         [BindProperty]
         public CustomerDto Customer { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public  IActionResult OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Customer = await _customersService.GetCustomer(id);
+            Customer =  _customersService.GetCustomer(id);
 
             if (Customer == null)
             {
@@ -33,14 +36,15 @@ namespace FunProject.Web.Pages.Customers
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public  IActionResult OnPostAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
+            //var customer = await _customersService.GetCustomer(id);
 
-            await _customersService.DeleteCustomer(id);
+             _customersService.DeleteCustomer(id);
 
             return RedirectToPage("./Index");
         }

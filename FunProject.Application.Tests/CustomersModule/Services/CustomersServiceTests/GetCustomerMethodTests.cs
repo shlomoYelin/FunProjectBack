@@ -14,7 +14,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
 {
     public class GetCustomerMethodTests
     {
-        private readonly Mock<ILoggerAdapter<CustomersService>> _logger;
+        private readonly Mock<ILoggerAdapter<ProductsService>> _logger;
         private readonly Mock<IMapperAdapter> _mapper;
         private readonly Mock<ICustomerByIdQuery> _customerByIdQuery;
         private readonly Customer _customer = new() { Id = 1, FirstName = "FirstName1", LastName = "LastName1" };
@@ -22,7 +22,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
 
         public GetCustomerMethodTests()
         {
-            _logger = new Mock<ILoggerAdapter<CustomersService>>();
+            _logger = new Mock<ILoggerAdapter<ProductsService>>();
             _logger.Setup(x => x.LogInformation(It.IsAny<string>()));
 
             _mapper = new Mock<IMapperAdapter>();
@@ -35,7 +35,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
         [Fact]
         public async Task GetCustomer_LogInformation_WhenMethodWasCalledAsync()
         {
-            var sut = new CustomersService(_logger.Object, _mapper.Object, _customerByIdQuery.Object, null, null, null);
+            var sut = new CustomersService(_logger.Object, _mapper.Object, _customerByIdQuery.Object, null, null, null,null);
 
             await sut.GetCustomer(1);
 
@@ -47,7 +47,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
         {
             _customerByIdQuery.Setup(x => x.Get(It.IsAny<int>())).ReturnsAsync(() => null);
 
-            var sut = new CustomersService(_logger.Object, _mapper.Object, _customerByIdQuery.Object, null, null, null);
+            var sut = new CustomersService(_logger.Object, _mapper.Object, _customerByIdQuery.Object, null, null, null,null);
 
             var result = await sut.GetCustomer(1);
 
@@ -60,7 +60,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
             _mapper.Setup(x => x.Map<CustomerDto>(_customer)).Returns(_customerDto);
             _customerByIdQuery.Setup(x => x.Get(1)).ReturnsAsync(_customer);
 
-            var sut = new CustomersService(_logger.Object, _mapper.Object, _customerByIdQuery.Object, null, null, null);
+            var sut = new CustomersService(_logger.Object, _mapper.Object, _customerByIdQuery.Object, null, null, null,null);
 
             var result = await sut.GetCustomer(1);
 
@@ -73,7 +73,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
         [Fact]
         public async Task GetCustomer_CustomerByIdQuery_Get_ShouldBeInvoked()
         {
-            var sut = new CustomersService(_logger.Object, _mapper.Object, _customerByIdQuery.Object, null, null, null);
+            var sut = new CustomersService(_logger.Object, _mapper.Object, _customerByIdQuery.Object, null, null, null,null);
 
             await sut.GetCustomer(1);
 
@@ -83,7 +83,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
         [Fact]
         public async Task GetCustomer_CustomerByIdQuery_Get_ResultShouldBeMappedFromCustomerToCustomerDto()
         {
-            var sut = new CustomersService(_logger.Object, _mapper.Object, _customerByIdQuery.Object, null, null, null);
+            var sut = new CustomersService(_logger.Object, _mapper.Object, _customerByIdQuery.Object, null, null, null,null);
 
             await sut.GetCustomer(1);
 
@@ -96,7 +96,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
             _logger.Setup(x => x.LogError(It.IsAny<Exception>(), It.IsAny<string>()));
             _customerByIdQuery.Setup(x => x.Get(1)).Throws(new Exception());
 
-            var sut = new CustomersService(_logger.Object, _mapper.Object, _customerByIdQuery.Object, null, null, null);
+            var sut = new CustomersService(_logger.Object, _mapper.Object, _customerByIdQuery.Object, null, null, null,null);
 
             var ex = await ThrowsAsync<Exception>(() => sut.GetCustomer(1));
             _logger.Verify(x => x.LogError(ex, "Method GetCustomer failed."), Times.Once);

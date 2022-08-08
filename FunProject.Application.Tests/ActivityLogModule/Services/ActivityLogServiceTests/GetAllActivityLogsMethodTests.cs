@@ -11,6 +11,7 @@ using FunProject.Domain.Enums;
 using System.Threading.Tasks;
 using Xunit;
 using static Xunit.Assert;
+using FunProject.Application.Data.ActivityLogs.Command;
 
 namespace FunProject.Application.Tests.ActivityLogModule.Services.ActivityLogServiceTests
 {
@@ -19,6 +20,7 @@ namespace FunProject.Application.Tests.ActivityLogModule.Services.ActivityLogSer
         private readonly Mock<ILoggerAdapter<ActivityLogService>> _logger;
         private readonly Mock<IMapperAdapter> _mapper;
         private readonly Mock<IAllActivityLogsQuery> _allActivityLogsQuery;
+        private readonly Mock<ICreateActivityLogsCommand> _craeteActivityLog;
 
         private static readonly DateTime ActivityDate = new(2020, 01, 15);
 
@@ -27,9 +29,7 @@ namespace FunProject.Application.Tests.ActivityLogModule.Services.ActivityLogSer
             new()
             {
                 Id = 1, 
-                CustomerId= 1, 
-                FirstName = "FirstName1", 
-                LastName = "LastName1", 
+                Message = "",
                 ActivityDate = ActivityDate, 
                 ActionType = ActionType.Create 
             }
@@ -63,7 +63,7 @@ namespace FunProject.Application.Tests.ActivityLogModule.Services.ActivityLogSer
         [Fact]
         public async Task GetAllActivityLogs_LogInformation_WhenMethodWasCalled_Async()
         {
-            var sut = new ActivityLogService(_logger.Object, _mapper.Object, _allActivityLogsQuery.Object);
+            var sut = new ActivityLogService(_logger.Object, _mapper.Object, _allActivityLogsQuery.Object,null);
 
             await sut.GetAllActivityLogs();
 
@@ -77,7 +77,7 @@ namespace FunProject.Application.Tests.ActivityLogModule.Services.ActivityLogSer
             _allActivityLogsQuery.Setup(x => x.Get()).ReturnsAsync(new List<ActivityLog>());
             _mapper.Setup(x => x.Map<IList<ActivityLogDto>>(new List<ActivityLog>())).Returns(new List<ActivityLogDto>());
             
-            var sut = new ActivityLogService(_logger.Object, _mapper.Object, _allActivityLogsQuery.Object);
+            var sut = new ActivityLogService(_logger.Object, _mapper.Object, _allActivityLogsQuery.Object,null);
             var result = await sut.GetAllActivityLogs();
 
             Empty(result);
@@ -86,7 +86,7 @@ namespace FunProject.Application.Tests.ActivityLogModule.Services.ActivityLogSer
         [Fact]
         public async Task GetAllActivityLogs_ShouldInvoke_AllActivityLogsQuery_Get_Async()
         {
-            var sut = new ActivityLogService(_logger.Object, _mapper.Object, _allActivityLogsQuery.Object);
+            var sut = new ActivityLogService(_logger.Object, _mapper.Object, _allActivityLogsQuery.Object,null);
 
             await sut.GetAllActivityLogs();
 
@@ -97,7 +97,7 @@ namespace FunProject.Application.Tests.ActivityLogModule.Services.ActivityLogSer
         [Fact]
         public async Task GetAllActivityLogs_AllActivityLogsQuery_Get_Result_MapTo_ActivityLogDtoList_Async()
         {
-            var sut = new ActivityLogService(_logger.Object, _mapper.Object, _allActivityLogsQuery.Object);
+            var sut = new ActivityLogService(_logger.Object, _mapper.Object, _allActivityLogsQuery.Object,null);
 
             await sut.GetAllActivityLogs();
 
@@ -108,7 +108,7 @@ namespace FunProject.Application.Tests.ActivityLogModule.Services.ActivityLogSer
         [Fact]
         public async Task GetAllActivityLogs_ShouldReturnListOfActivityLogs_Async()
         {
-            var sut = new ActivityLogService(_logger.Object, _mapper.Object, _allActivityLogsQuery.Object);
+            var sut = new ActivityLogService(_logger.Object, _mapper.Object, _allActivityLogsQuery.Object,null);
             
             var result = await sut.GetAllActivityLogs();
 
@@ -121,7 +121,7 @@ namespace FunProject.Application.Tests.ActivityLogModule.Services.ActivityLogSer
             _logger.Setup(x => x.LogError(It.IsAny<Exception>(), It.IsAny<string>()));
             _allActivityLogsQuery.Setup(x => x.Get()).Throws(new Exception());
 
-            var sut = new ActivityLogService(_logger.Object, _mapper.Object, _allActivityLogsQuery.Object);
+            var sut = new ActivityLogService(_logger.Object, _mapper.Object, _allActivityLogsQuery.Object,null);
 
             var ex = await ThrowsAsync<Exception>(() => sut.GetAllActivityLogs());
             _logger.Verify(x => x.LogError(ex, "Method GetAllActivityLogs failed."), Times.Once,

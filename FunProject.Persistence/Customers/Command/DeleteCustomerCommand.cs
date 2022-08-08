@@ -1,6 +1,5 @@
 ﻿using FunProject.Application.Data.Customers.Command;
 using FunProject.Domain.Entities;
-using System.Threading.Tasks;
 
 namespace FunProject.Persistence.Customers.Command
 {
@@ -13,10 +12,10 @@ namespace FunProject.Persistence.Customers.Command
             _appDbContext = appDbContext;
         }
 
-        public async Task Delete(Customer customer)
+        public void Delete(Customer customer)
         {
-            _appDbContext.Customers.Remove(customer);
-            await _appDbContext.SaveChangesAsync();
+            _ = _appDbContext.Customers.Remove(customer);
+            _ = _appDbContext.SaveChangesAsync();
         }
     }
 }

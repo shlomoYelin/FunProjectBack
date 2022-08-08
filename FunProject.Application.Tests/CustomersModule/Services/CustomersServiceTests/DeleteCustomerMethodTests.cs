@@ -14,13 +14,13 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
     public class DeleteCustomerMethodTests
     {
         private readonly Customer _customer = new() { Id = 1, FirstName = "FirstName1", LastName = "LastName1" };
-        private readonly Mock<ILoggerAdapter<CustomersService>> _logger;
+        private readonly Mock<ILoggerAdapter<ProductsService>> _logger;
         private readonly Mock<IDeleteCustomerCommand> _deleteCustomerCommand;
         private readonly Mock<ICustomerByIdQuery> _customerByIdQuery;
 
         public DeleteCustomerMethodTests()
         {
-            _logger = new Mock<ILoggerAdapter<CustomersService>>();
+            _logger = new Mock<ILoggerAdapter<ProductsService>>();
             _logger.Setup(x => x.LogInformation(It.IsAny<string>()));
 
             _customerByIdQuery = new Mock<ICustomerByIdQuery>();
@@ -43,7 +43,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
         [Fact]
         public async Task DeleteCustomer_GetCustomerById_FindCustomerByIdForDeletion()
         {
-            var sut = new CustomersService(_logger.Object, null, _customerByIdQuery.Object, null, null, _deleteCustomerCommand.Object);
+            var sut = new CustomersService(_logger.Object, null, _customerByIdQuery.Object, null, null, _deleteCustomerCommand.Object,null);
 
             await sut.DeleteCustomer(1);
 
@@ -53,7 +53,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
         [Fact]
         public async Task DeleteCustomer_WhenCustomerNotNotFound_DoNotDeleteCustomer()
         {
-            var sut = new CustomersService(_logger.Object, null, _customerByIdQuery.Object, null, null, _deleteCustomerCommand.Object);
+            var sut = new CustomersService(_logger.Object, null, _customerByIdQuery.Object, null, null, _deleteCustomerCommand.Object,null);
             _customerByIdQuery.Setup(x => x.Get(1)).ReturnsAsync(() => null);
 
             await sut.DeleteCustomer(1);
@@ -64,7 +64,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
         [Fact]
         public async Task DeleteCustomer_WhenCustomerFound_DeleteCustomer()
         {
-            var sut = new CustomersService(_logger.Object, null, _customerByIdQuery.Object, null, null, _deleteCustomerCommand.Object);
+            var sut = new CustomersService(_logger.Object, null, _customerByIdQuery.Object, null, null, _deleteCustomerCommand.Object,null);
 
             await sut.DeleteCustomer(1);
 
@@ -77,7 +77,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
             _logger.Setup(x => x.LogError(It.IsAny<Exception>(), It.IsAny<string>()));
             _customerByIdQuery.Setup(x => x.Get(1)).Throws(new Exception());
 
-            var sut = new CustomersService(_logger.Object, null, _customerByIdQuery.Object, null, null, _deleteCustomerCommand.Object);
+            var sut = new CustomersService(_logger.Object, null, _customerByIdQuery.Object, null, null, _deleteCustomerCommand.Object,null);
 
             var ex = await ThrowsAsync<Exception>(() => sut.DeleteCustomer(1));
             _logger.Verify(x => x.LogError(ex, "Method DeleteCustomer failed."), Times.Once);
@@ -89,7 +89,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
             _logger.Setup(x => x.LogError(It.IsAny<Exception>(), It.IsAny<string>()));
             _deleteCustomerCommand.Setup(x => x.Delete(_customer)).Throws(new Exception());
 
-            var sut = new CustomersService(_logger.Object, null, _customerByIdQuery.Object, null, null, _deleteCustomerCommand.Object);
+            var sut = new CustomersService(_logger.Object, null, _customerByIdQuery.Object, null, null, _deleteCustomerCommand.Object,null);
 
             var ex = await ThrowsAsync<Exception>(() => sut.DeleteCustomer(1));
             _logger.Verify(x => x.LogError(ex, "Method DeleteCustomer failed."), Times.Once);

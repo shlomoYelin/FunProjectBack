@@ -8,9 +8,19 @@ namespace FunProject.Infrastructure.Mapper.Mapping
     {
         public CustomerMap()
         {
-            CreateMap<Customer, CustomerDto>();
-            
-            CreateMap<CustomerDto, Customer>();
+            _ = CreateMap<Customer, CustomerDto>()
+                .ForMember(d => d.Id, s => s.MapFrom(x => x.Id))
+                .ForMember(d => d.FirstName, s => s.MapFrom(x => x.FirstName))
+                .ForMember(d => d.LastName, s => s.MapFrom(x => x.LastName))
+                .ForMember(d => d.Type, s => s.MapFrom(x => x.Type));
+
+
+
+            _ = CreateMap<CustomerDto, Customer>()
+                .ForMember(d => d.Id, s => s.MapFrom(x => x.Id))
+                .ForMember(d => d.FirstName, s => s.MapFrom(x => x.FirstName))
+                .ForMember(d => d.LastName, s => s.MapFrom(x => x.LastName))
+                .ForMember(d => d.Type, s => s.MapFrom(x => x.Type));
         }
     }
 }

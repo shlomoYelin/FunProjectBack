@@ -20,13 +20,13 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
         private readonly Customer _createdCustomer = new() { Id = 1, FirstName = "FirstName1", LastName = "LastName1" };
         private readonly CustomerDto _createdCustomerDto = new() { Id = 1, FirstName = "FirstName1", LastName = "LastName1" };
 
-        private readonly Mock<ILoggerAdapter<CustomersService>> _logger;
+        private readonly Mock<ILoggerAdapter<ProductsService>> _logger;
         private readonly Mock<IMapperAdapter> _mapper;
         private readonly Mock<ICreateCustomerCommand> _createCustomerCommand;
 
         public CreateCustomerMethodTests()
         {
-            _logger = new Mock<ILoggerAdapter<CustomersService>>();
+            _logger = new Mock<ILoggerAdapter<ProductsService>>();
             _logger.Setup(x => x.LogInformation(It.IsAny<string>()));
 
             _mapper = new Mock<IMapperAdapter>();
@@ -39,7 +39,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
         [Fact]
         public async Task CreateCustomer_LogInformation_WhenMethodWasCalledAsync()
         {
-            var sut = new CustomersService(_logger.Object, _mapper.Object, null, null, _createCustomerCommand.Object, null);
+            var sut = new CustomersService(_logger.Object, _mapper.Object, null, null, _createCustomerCommand.Object, null,null);
 
             await sut.CreateCustomer(_customerDto);
 
@@ -49,7 +49,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
         [Fact]
         public async Task CreateCustomer_CreateCommand_Parameter_MapCustomerDtoToCustomerEntity()
         {
-            var sut = new CustomersService(_logger.Object, _mapper.Object, null, null, _createCustomerCommand.Object, null);
+            var sut = new CustomersService(_logger.Object, _mapper.Object, null, null, _createCustomerCommand.Object, null,null);
 
             await sut.CreateCustomer(_customerDto);
 
@@ -61,7 +61,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
         {
             _mapper.Setup(x => x.Map<CustomerDto>(_createdCustomer)).Returns(_createdCustomerDto);
 
-            var sut = new CustomersService(_logger.Object, _mapper.Object, null, null, _createCustomerCommand.Object, null);
+            var sut = new CustomersService(_logger.Object, _mapper.Object, null, null, _createCustomerCommand.Object, null,null);
 
             var result = await sut.CreateCustomer(_customerDto);
 
@@ -75,7 +75,7 @@ namespace FunProject.Application.Tests.CustomersModule.Services.CustomersService
             _logger.Setup(x => x.LogError(It.IsAny<Exception>(), It.IsAny<string>()));
             _createCustomerCommand.Setup(x => x.Create(_customer)).Throws(new Exception());
 
-            var sut = new CustomersService(_logger.Object, _mapper.Object, null, null, _createCustomerCommand.Object, null);
+            var sut = new CustomersService(_logger.Object, _mapper.Object, null, null, _createCustomerCommand.Object, null,null);
 
             var ex = await ThrowsAsync<Exception>(() => sut.CreateCustomer(_customerDto));
             _logger.Verify(x => x.LogError(ex, "Method CreateCustomer failed."), Times.Once);

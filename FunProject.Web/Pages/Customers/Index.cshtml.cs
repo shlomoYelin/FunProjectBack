@@ -1,23 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using FunProject.Application.CustomersModule.Services.Interfaces;
 using FunProject.Application.CustomersModule.Dtos;
 
 namespace FunProject.Web.Pages.Customers
 {
     public class IndexModel : PageModel
     {
-        private readonly ICustomersService _customersService;
+        private readonly IProductsService _customersService;
 
-        public IndexModel(ICustomersService customersService)
+        public IndexModel(IProductsService customersService)
         {
             _customersService = customersService;
         }
 
         public IList<CustomerDto> Customer { get;set; }
 
-        public async Task OnGetAsync()
+        public void OnGetAsync()
         {
-            Customer = await _customersService.GetAllCustomers();
+            Customer =  _customersService.GetAllCustomers();
         }
     }
 }

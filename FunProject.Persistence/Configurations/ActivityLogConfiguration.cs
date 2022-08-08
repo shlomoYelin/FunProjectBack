@@ -8,8 +8,8 @@ namespace FunProject.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<ActivityLog> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            _ = builder.HasKey(x => x.Id);
+            _ = builder.Property(x => x.Id).ValueGeneratedOnAdd();
         }
     }
 }
