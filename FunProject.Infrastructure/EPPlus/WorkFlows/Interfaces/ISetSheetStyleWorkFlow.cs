@@ -12,7 +12,7 @@ namespace FunProject.Infrastructure.EPPlus.WorkFlows.Interfaces
     public interface ISetSheetStyleWorkFlow
     {
         public ExcelWorksheet Set<T>(ExcelWorksheet worksheet, Dictionary<PropertyInfo, ExcelColumnStyleAttribute> propsDict);
-        public ExcelWorksheet Set<T>(ExcelWorksheet worksheet, IList<ExcelColumnStyleAttribute> attributes);
+        public ExcelWorksheet Set(ExcelWorksheet worksheet, IList<ExcelColumnStyleAttribute> attributes);
 
     }
 }

@@ -57,7 +57,7 @@ namespace FunProject.Infrastructure.EPPlus
                 //worksheet = _addRowsToSheetTask.Add(worksheet, data);
                 worksheet = _addRowsToSheetTask.Add(worksheet, data, propsDict.Keys.ToList());
 
-                worksheet = _setSheetStyleWorkFlow.s
+                worksheet = _setSheetStyleWorkFlow.Set(worksheet, propsDict.Values.ToList());
 
                 xlPackage.Save();
             }
