@@ -10,7 +10,6 @@ using FunProject.Application.CustomersModule.WorkFlows;
 using FunProject.Application.CustomersModule.WorkFlows.Interfaces;
 using FunProject.Application.CustomersModule.WorkFlows.Tasks;
 using FunProject.Application.CustomersModule.WorkFlows.Tasks.Interfaces;
-using FunProject.Application.ExcelModule;
 using FunProject.Application.HubModule;
 using FunProject.Application.OrdersModule.Factorys;
 using FunProject.Application.OrdersModule.Factorys.Interfaces;
@@ -34,11 +33,12 @@ using FunProject.Application.ProductsModule.WorkFlows;
 using FunProject.Application.ProductsModule.WorkFlows.Interfaces;
 using FunProject.Application.ProductsModule.WorkFlows.Tasks;
 using FunProject.Application.ProductsModule.WorkFlows.Tasks.Interfaces;
+using FunProject.Domain.ExcelModule;
 using FunProject.Domain.Logger;
 using FunProject.Domain.Mapper;
 using FunProject.Infrastructure.EPPlus;
-using FunProject.Infrastructure.EPPlus.Tasks;
-using FunProject.Infrastructure.EPPlus.Tasks.Interfaces;
+using FunProject.Infrastructure.EPPlus.WorkFlows.Tasks;
+using FunProject.Infrastructure.EPPlus.WorkFlows.Tasks.Interfaces;
 using FunProject.Infrastructure.Logger;
 using FunProject.Infrastructure.Mapper;
 using FunProject.Infrastructure.SignalR;
@@ -201,7 +201,7 @@ namespace FunProject.Infrastructure
             //Tasks
             _ = services.AddTransient<ISetAsBlodTask, SetAsBlodTask>();
             _ = services.AddTransient<IAddRowsToSheetTask, AddRowsToSheetTask>();
-            _ = services.AddTransient<IAddColumnsToSheetTask, AddColumnsToSheetTask>();
+            _ = services.AddTransient<ISetColumnsNamesToSheetTask, SetColumnsNamesToSheetTask>();
 
         }
     }

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FunProject.Application.ProductOrderModule.Dtos;
+using FunProject.Application.OrdersModule.Dtos;
 using FunProject.Domain.Entities;
 
 namespace FunProject.Infrastructure.Mapper.Mapping

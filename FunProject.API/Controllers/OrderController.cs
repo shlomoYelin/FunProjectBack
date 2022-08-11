@@ -3,7 +3,6 @@ using FunProject.Application.OrdersModule.Models;
 using FunProject.Application.OrdersModule.Services.Interfaces;
 using FunProject.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Drawing;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

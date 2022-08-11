@@ -1,5 +1,5 @@
-﻿using FunProject.Application.OrdersModule.WorkFlows.Tasks.Interfaces;
-using FunProject.Application.ProductOrderModule.Dtos;
+﻿using FunProject.Application.OrdersModule.Dtos;
+using FunProject.Application.OrdersModule.WorkFlows.Tasks.Interfaces;
 using FunProject.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;

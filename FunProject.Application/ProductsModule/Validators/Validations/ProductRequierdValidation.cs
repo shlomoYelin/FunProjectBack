@@ -9,12 +9,12 @@ namespace FunProject.Application.ProductsModule.Validators.Validations
         {
             string ErrorMessage = "";
 
-            if (product.Description == null || product.Description == "")
+            if (product.Description is null or "")
             {
                 ErrorMessage = "Product name is required.";
             }
 
-            if (product.Price <= 0 || product.Price == null)
+            if (product.Price <= 0)
             {
                 ErrorMessage += " Product price is required.";
             }

@@ -1,5 +1,5 @@
 ﻿using FunProject.Application.Data.Products.Query;
-using FunProject.Application.ProductOrderModule.Dtos;
+using FunProject.Application.OrdersModule.Dtos;
 using FunProject.Application.ProductsModule.Validators.Validations.Interfaces;
 using System.Collections.Generic;
 using System.Linq;

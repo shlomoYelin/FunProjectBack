@@ -1,9 +1,5 @@
 ﻿using FunProject.Domain.Atrributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FunProject.Domain.Entities;
 
 namespace FunProject.Application.OrdersModule.Models
 {
@@ -20,5 +16,7 @@ namespace FunProject.Application.OrdersModule.Models
         public string LastName { get; set; }
         [DisplaydName("Customer type")]
         public string CustomerType { get; set; }
+        [DisplaydName("Customer type")]
+        public Order MyProperty { get; set; }
     }
 }

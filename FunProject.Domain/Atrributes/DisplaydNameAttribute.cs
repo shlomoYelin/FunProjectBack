@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FunProject.Domain.Atrributes
 {
+    [AttributeUsage(AttributeTargets.Property)]
     public class DisplaydNameAttribute : Attribute
     {
         public DisplaydNameAttribute(string name)

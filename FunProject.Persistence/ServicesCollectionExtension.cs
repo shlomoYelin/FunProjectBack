@@ -53,7 +53,6 @@ namespace FunProject.Persistence
             _ = services.AddTransient<IGetProductDescQuery, GetProductDescQuery>();
             _ = services.AddTransient<IGetProductsBySearchValueQuery, GetProductsBySearchValueQuery>();
             _ = services.AddTransient<IProductIsInStockQuery, ProductIsInStockQuery>();
-            _ = services.AddTransient<IGetOutOfStockProductsQuery, GetOutOfStockProductsQuery>();
             _ = services.AddTransient<IGetAllOutOfStockProductsQuery, GetAllOutOfStockProductsQuery>();
             _ = services.AddTransient<IProductsByOrderIdQuery, ProductsByOrderIdQuery>();
             _ = services.AddTransient<IProductsByIdsQuery, ProductsByIdsQuery>();

@@ -1,4 +1,4 @@
-﻿namespace FunProject.Application.ProductOrderModule.Dtos
+﻿namespace FunProject.Application.OrdersModule.Dtos
 {
     public class ProductOrderDto
     {
