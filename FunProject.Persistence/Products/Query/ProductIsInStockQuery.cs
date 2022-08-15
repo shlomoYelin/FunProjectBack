@@ -18,7 +18,6 @@ namespace FunProject.Persistence.Products.Query
                 .Where(p => p.Id == productId)
                 .Select(p => p.Quantity)
                 .FirstOrDefault();
-            //return _appDbContext.Products.Any(p => p.Id == productId && p.Quantity >= quantity);
         }
     }
 }

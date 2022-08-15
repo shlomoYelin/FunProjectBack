@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace FunProject.Infrastructure.EPPlus.WorkFlows.Tasks.Interfaces
 {
-    public interface ISetColumnsStyleTask
+    public interface ISetHeaderBlodTask
     {
-        ExcelWorksheet Set<T>(ExcelWorksheet worksheet);
+        ExcelWorksheet Set(ExcelWorksheet worksheet, bool blod);
     }
 }

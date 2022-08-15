@@ -1,15 +1,14 @@
-﻿using FunProject.Domain.Atrributes;
+﻿using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FunProject.Infrastructure.EPPlus.WorkFlows.Tasks.Interfaces
 {
-    public interface IGetPropAndStyleAtrributeDictionaryTask
+    public interface ISetHeaderHeightTask
     {
-        Dictionary<PropertyInfo, ExcelColumnStyleAttribute> Get<T>();
+        ExcelWorksheet Set(ExcelWorksheet worksheet, double height);
     }
 }

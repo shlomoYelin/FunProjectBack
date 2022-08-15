@@ -4,8 +4,8 @@ using System.IO;
 using FunProject.Domain.ExcelModule;
 using FunProject.Infrastructure.EPPlus.WorkFlows.Tasks.Interfaces;
 using System.Linq;
-using FunProject.Domain.Atrributes;
 using FunProject.Infrastructure.EPPlus.WorkFlows.Interfaces;
+using FunProject.Domain.Attributes;
 
 namespace FunProject.Infrastructure.EPPlus
 {
@@ -13,16 +13,14 @@ namespace FunProject.Infrastructure.EPPlus
     {
         private readonly ISetColumnsNamesToSheetTask _setColumnsNamesToSheetTask1;
         private readonly IAddRowsToSheetTask _addRowsToSheetTask;
-        private readonly ISetAsBlodTask _setAsBlodTask;
-        private readonly IGetPropAndStyleAtrributeDictionaryTask _getPropAndStyleAtrributeDictionaryTask;
+        private readonly IGetPropAndStyleAttributeDictionaryTask _getPropAndStyleAttributeDictionaryTask;
         private readonly ISetSheetStyleWorkFlow _setSheetStyleWorkFlow;
 
-        public ExcelAdapter(ISetColumnsNamesToSheetTask setColumnsNamesToSheetTask1, IAddRowsToSheetTask addRowsToSheetTask, ISetAsBlodTask setAsBlodTask, IGetPropAndStyleAtrributeDictionaryTask getPropAndStyleAtrributeDictionaryTask, ISetSheetStyleWorkFlow setSheetStyleWorkFlow)
+        public ExcelAdapter(ISetColumnsNamesToSheetTask setColumnsNamesToSheetTask1, IAddRowsToSheetTask addRowsToSheetTask, IGetPropAndStyleAttributeDictionaryTask getPropAndStyleAttributeDictionaryTask, ISetSheetStyleWorkFlow setSheetStyleWorkFlow)
         {
             _setColumnsNamesToSheetTask1 = setColumnsNamesToSheetTask1;
             _addRowsToSheetTask = addRowsToSheetTask;
-            _setAsBlodTask = setAsBlodTask;
-            _getPropAndStyleAtrributeDictionaryTask = getPropAndStyleAtrributeDictionaryTask;
+            _getPropAndStyleAttributeDictionaryTask = getPropAndStyleAttributeDictionaryTask;
             _setSheetStyleWorkFlow = setSheetStyleWorkFlow;
         }
 
@@ -32,32 +30,19 @@ namespace FunProject.Infrastructure.EPPlus
 
             var stream = new MemoryStream();
 
-            //var propsDict = typeof(T).GetProperties()
-            //    .Where(prop => prop
-            //        .GetCustomAttributes(typeof(ExcelColumnStyleAttribute), false).Length > 0)
+            var propsDict = _getPropAndStyleAttributeDictionaryTask.Get<T>();
 
-            //    .ToDictionary(prop => prop,
-            //    prop => (ExcelColumnStyleAttribute)prop
-            //    .GetCustomAttributes(typeof(ExcelColumnStyleAttribute), false)
-            //    .First())
-
-            //    .OrderBy(prop => prop.Value.Index);
-
-            var propsDict = _getPropAndStyleAtrributeDictionaryTask.Get<T>();
+            var headStyleAttributes = (ExcelHeaderStyleAttribute[])typeof(T).GetCustomAttributes(typeof(ExcelHeaderStyleAttribute), false);
 
             using (var xlPackage = new ExcelPackage(stream))
             {
                 var worksheet = xlPackage.Workbook.Worksheets.Add(worksheetName);
 
-                //worksheet = _addColumnsToSheetTask.Add<T>(worksheet);
                 worksheet = _setColumnsNamesToSheetTask1.Set(worksheet, propsDict.Values.ToList());
-                //todo: workFlow - set head style
-                worksheet = _setAsBlodTask.Set(worksheet, (1, 1), (propsDict.Count, 1));
-
-                //worksheet = _addRowsToSheetTask.Add(worksheet, data);
+                
                 worksheet = _addRowsToSheetTask.Add(worksheet, data, propsDict.Keys.ToList());
 
-                worksheet = _setSheetStyleWorkFlow.Set(worksheet, propsDict.Values.ToList());
+                worksheet = _setSheetStyleWorkFlow.Set(worksheet, propsDict.Values.ToList(), headStyleAttributes);
 
                 xlPackage.Save();
             }

@@ -37,6 +37,8 @@ using FunProject.Domain.ExcelModule;
 using FunProject.Domain.Logger;
 using FunProject.Domain.Mapper;
 using FunProject.Infrastructure.EPPlus;
+using FunProject.Infrastructure.EPPlus.WorkFlows;
+using FunProject.Infrastructure.EPPlus.WorkFlows.Interfaces;
 using FunProject.Infrastructure.EPPlus.WorkFlows.Tasks;
 using FunProject.Infrastructure.EPPlus.WorkFlows.Tasks.Interfaces;
 using FunProject.Infrastructure.Logger;
@@ -197,12 +199,20 @@ namespace FunProject.Infrastructure
 
             //EPPlus
             _ = services.AddTransient<IExcelAdapter, ExcelAdapter>();
+            _ = services.AddTransient<ISetSheetStyleWorkFlow, SetSheetStyleWorkFlow>();
 
             //Tasks
             _ = services.AddTransient<ISetAsBlodTask, SetAsBlodTask>();
             _ = services.AddTransient<IAddRowsToSheetTask, AddRowsToSheetTask>();
             _ = services.AddTransient<ISetColumnsNamesToSheetTask, SetColumnsNamesToSheetTask>();
-
+            _ = services.AddTransient<IGetPropAndStyleAttributeDictionaryTask, GetPropAndStyleAttributeDictionaryTask>();
+            _ = services.AddTransient<ISetColumnWidthTask, SetColumnWidthTask>();
+            _ = services.AddTransient<ISetColumnBoldTask, SetColumnBoldTask>();
+            _ = services.AddTransient<ISetColumnColorTask, SetColumnColorTask>();
+            _ = services.AddTransient<ISetColumnNameTask, SetColumnNameTask>();
+            _ = services.AddTransient<ISetHeaderColorTask, SetHeaderColorTask>();
+            _ = services.AddTransient<ISetHeaderBlodTask, SetHeaderBlodTask>();
+            _ = services.AddTransient<ISetHeaderHeightTask, SetHeaderHeightTask>();
         }
     }
 }

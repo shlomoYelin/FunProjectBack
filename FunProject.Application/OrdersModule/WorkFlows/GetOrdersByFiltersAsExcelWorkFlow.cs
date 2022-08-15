@@ -13,14 +13,12 @@ namespace FunProject.Application.OrdersModule.WorkFlows
         private readonly IGetAllOrderQueryPlginsTask _getAllOrderQueryPlginsTask;
         private readonly IOrdersByFiltersTask _ordersByFiltersTask;
         private readonly IExcelAdapter _excelAdapter;
-        private readonly IMapperAdapter _mapper;
 
-        public GetOrdersByFiltersAsExcelWorkFlow(IGetAllOrderQueryPlginsTask getAllOrderQueryPlginsTask, IOrdersByFiltersTask ordersByFiltersTask, IExcelAdapter excelAdapter, IMapperAdapter mapper)
+        public GetOrdersByFiltersAsExcelWorkFlow(IGetAllOrderQueryPlginsTask getAllOrderQueryPlginsTask, IOrdersByFiltersTask ordersByFiltersTask, IExcelAdapter excelAdapter)
         {
             _getAllOrderQueryPlginsTask = getAllOrderQueryPlginsTask;
             _ordersByFiltersTask = ordersByFiltersTask;
             _excelAdapter = excelAdapter;
-            _mapper = mapper;
         }
 
         public MemoryStream Get(OrderFiltersValuesModel filtersValues)
@@ -29,7 +27,7 @@ namespace FunProject.Application.OrdersModule.WorkFlows
 
             var orders = _ordersByFiltersTask.Get(filtersValues, plagins);
 
-            return _excelAdapter.GenerateExcel(_mapper.Map<IList<OrderStringsModel>>(orders),"Orders");
+            return _excelAdapter.GenerateExcel(orders,"Orders");
         }
     }
 }

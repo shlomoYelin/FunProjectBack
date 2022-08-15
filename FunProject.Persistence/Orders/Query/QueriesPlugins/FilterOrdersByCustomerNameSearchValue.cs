@@ -6,7 +6,7 @@ using System.Linq;
 namespace FunProject.Persistence.Orders.Query.QueriesPlugins
 {
     public class FilterOrdersByCustomerNameSearchValue : IFilterOrdersByCustomerNameSearchValue
-    {
+    {//todo: move to application
         public IQueryable<Order> Execute(IQueryable<Order> query, OrderFiltersValuesModel filtersValues)
         {
             return string.IsNullOrEmpty(filtersValues.CustomerNameSearchValue) ? query : query

@@ -1,15 +1,12 @@
-﻿using FunProject.Domain.Atrributes;
+﻿using FunProject.Domain.Attributes;
 using FunProject.Infrastructure.EPPlus.WorkFlows.Tasks.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FunProject.Infrastructure.EPPlus.WorkFlows.Tasks
 {
-    public class GetPropAndStyleAtrributeDictionaryTask : IGetPropAndStyleAtrributeDictionaryTask
+    public class GetPropAndStyleAttributeDictionaryTask : IGetPropAndStyleAttributeDictionaryTask
     {
         public Dictionary<PropertyInfo, ExcelColumnStyleAttribute> Get<T>()
         {
