@@ -12,7 +12,8 @@ namespace FunProject.Infrastructure.Mapper.Mapping
                 .ForMember(d => d.Id, s => s.MapFrom(x => x.Id))
                 .ForMember(d => d.FirstName, s => s.MapFrom(x => x.FirstName))
                 .ForMember(d => d.LastName, s => s.MapFrom(x => x.LastName))
-                .ForMember(d => d.Type, s => s.MapFrom(x => x.Type));
+                .ForMember(d => d.Type, s => s.MapFrom(x => x.Type))
+                .ForMember(d => d.Phone, s => s.MapFrom(x => x.Phone));
 
 
 
@@ -20,7 +21,9 @@ namespace FunProject.Infrastructure.Mapper.Mapping
                 .ForMember(d => d.Id, s => s.MapFrom(x => x.Id))
                 .ForMember(d => d.FirstName, s => s.MapFrom(x => x.FirstName))
                 .ForMember(d => d.LastName, s => s.MapFrom(x => x.LastName))
-                .ForMember(d => d.Type, s => s.MapFrom(x => x.Type));
+                .ForMember(d => d.Type, s => s.MapFrom(x => x.Type))
+                .ForMember(d => d.Phone, s => s.MapFrom(x => x.Phone));
+
         }
     }
 }
