@@ -11,5 +11,6 @@ namespace FunProject.Application.CustomersModule.Services.Interfaces
         ActionStatusModel CreateCustomer(CustomerDto customer);
         ActionStatusModel UpdateCustomer(CustomerDto customer);
         ActionStatusModel DeleteCustomer(int id);
+        bool ISCustomerPhoneNumberExists(string phoneNumber);
     }
 }

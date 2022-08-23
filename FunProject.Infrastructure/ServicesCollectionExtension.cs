@@ -69,6 +69,7 @@ namespace FunProject.Infrastructure
             _ = services.AddTransient<IGetCustomersByIdsTask, GetCustomersByIdsTask>();
             _ = services.AddTransient<IGetCustomerTypeTask, GetCustomerTypeTask>();
             _ = services.AddTransient<IGetCustomersBySearchValueTask, GetCustomersBySearchValueTask>();
+            _ = services.AddTransient<IISCustomerPhoneNumberExistsTask, ISCustomerPhoneNumberExistsTask>();
 
 
             //Product
@@ -122,6 +123,7 @@ namespace FunProject.Infrastructure
             _ = services.AddTransient<IUpdateCustomerWorkFlow, UpdateCustomerWorkFlow>();
             _ = services.AddTransient<IDeleteCustomerWorkFlow, DeleteCustomerWorkFlow>();
             _ = services.AddTransient<IGetCustomersBySearchValueWorkFlow, GetCustomersBySearchValueWorkFlow>();
+            _ = services.AddTransient<IISCustomerPhoneNumberExistsWorkFlow, ISCustomerPhoneNumberExistsWorkFlow>();
 
 
             //Product

@@ -26,8 +26,8 @@ namespace FunProject.Persistence.Orders.Query
                 .AsQueryable();
 
             return queryPlugins
-               .Aggregate(query, (current, queryPlugin) => queryPlugin
-               .Execute(current, filtersValues))
+               .Aggregate(query, (prevQueryable, queryPlugin) =>
+               queryPlugin.Execute(prevQueryable, filtersValues))
                .ToList();
         }
     }

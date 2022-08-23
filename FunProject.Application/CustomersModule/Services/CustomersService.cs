@@ -13,18 +13,16 @@ namespace FunProject.Application.CustomersModule.Services
         private readonly IUpdateCustomerWorkFlow _updateCustomerWorkFlow;
         private readonly IDeleteCustomerWorkFlow _deleteCustomerWorkFlow;
         private readonly IGetCustomersBySearchValueWorkFlow _getCustomersBySearchValueWorkFlow;
-        public CustomersService(
-            IGetAllCustomersWorkFlow getAllCustomersWorkFlow,
-            ICreateCustomerWorkFlow createCustomerWorkFlow,
-            IUpdateCustomerWorkFlow updateCustomerWorkFlow,
-            IDeleteCustomerWorkFlow deleteCustomerWorkFlow,
-            IGetCustomersBySearchValueWorkFlow getCustomersBySearchValueWorkFlow)
+        private readonly IISCustomerPhoneNumberExistsWorkFlow _iSCustomerPhoneNumberExistsWorkFlow;
+
+        public CustomersService(IGetAllCustomersWorkFlow getAllCustomersWorkFlow, ICreateCustomerWorkFlow createCustomerWorkFlow, IUpdateCustomerWorkFlow updateCustomerWorkFlow, IDeleteCustomerWorkFlow deleteCustomerWorkFlow, IGetCustomersBySearchValueWorkFlow getCustomersBySearchValueWorkFlow, IISCustomerPhoneNumberExistsWorkFlow iSCustomerPhoneNumberExistsWorkFlow)
         {
             _getAllCustomersWorkFlow = getAllCustomersWorkFlow;
             _createCustomerWorkFlow = createCustomerWorkFlow;
             _updateCustomerWorkFlow = updateCustomerWorkFlow;
             _deleteCustomerWorkFlow = deleteCustomerWorkFlow;
             _getCustomersBySearchValueWorkFlow = getCustomersBySearchValueWorkFlow;
+            _iSCustomerPhoneNumberExistsWorkFlow = iSCustomerPhoneNumberExistsWorkFlow;
         }
 
         public IList<CustomerDto> GetAllCustomers()
@@ -50,6 +48,11 @@ namespace FunProject.Application.CustomersModule.Services
         public IList<CustomerDto> GetCustomersBySearchValue(string searchValue)
         {
             return _getCustomersBySearchValueWorkFlow.Get(searchValue);
+        }
+
+        public bool ISCustomerPhoneNumberExists(string phoneNumber)
+        {
+            return _iSCustomerPhoneNumberExistsWorkFlow.IsExists(phoneNumber);
         }
     }
 }

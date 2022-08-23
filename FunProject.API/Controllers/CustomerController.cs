@@ -31,6 +31,12 @@ namespace FunProject.API.Controllers
             return _customersService.GetCustomersBySearchValue(searchValue);
         }
 
+        [HttpGet("{phoneNumber}")]
+        public bool ISCustomerPhoneNumberExists(string phoneNumber)
+        {
+            return _customersService.ISCustomerPhoneNumberExists(phoneNumber);
+        }
+
         // POST api/<CustomerController>
         [HttpPost]
         public ActionStatusModel CreateCustomer([FromBody] CustomerDto customer)

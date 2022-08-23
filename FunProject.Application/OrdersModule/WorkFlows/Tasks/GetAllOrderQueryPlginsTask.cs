@@ -23,6 +23,7 @@ namespace FunProject.Application.OrdersModule.WorkFlows.Tasks
             _filterOrdersByDateRange = filterOrdersByDateRange;
             _filterOrdersByProductNameSearchValue = filterOrdersByProductNameSearchValue;
         }
+
         public IList<IBaseOrderQueryPlugin> Get()
         {
             return new List<IBaseOrderQueryPlugin>()

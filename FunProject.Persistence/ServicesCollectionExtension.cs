@@ -45,6 +45,7 @@ namespace FunProject.Persistence
             _ = services.AddTransient<IGetCustomerTypeQuery, GetCustomerTypeQuery>();
             _ = services.AddTransient<IGetCustomerByIdQuery, GetCustomerByIdQuery>();
             _ = services.AddTransient<ICustomersBySearchValueQuery, CustomersBySearchValueQuery>();
+            _ = services.AddTransient<IISCustomerPhoneNumberExistsQuery, ISCustomerPhoneNumberExistsQuery>();
 
             //Product
             _ = services.AddTransient<IAllProductsQuery, AllProductsQuery>();
