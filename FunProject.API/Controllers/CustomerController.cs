@@ -34,6 +34,8 @@ namespace FunProject.API.Controllers
         [HttpGet("{phoneNumber}")]
         public bool ISCustomerPhoneNumberExists(string phoneNumber)
         {
+    
+
             return _customersService.ISCustomerPhoneNumberExists(phoneNumber);
         }
 

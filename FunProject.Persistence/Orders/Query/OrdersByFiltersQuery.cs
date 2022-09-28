@@ -25,6 +25,7 @@ namespace FunProject.Persistence.Orders.Query
                 .ThenInclude(productOrder => productOrder.Product)
                 .AsQueryable();
 
+
             return queryPlugins
                .Aggregate(query, (prevQueryable, queryPlugin) =>
                queryPlugin.Execute(prevQueryable, filtersValues))
