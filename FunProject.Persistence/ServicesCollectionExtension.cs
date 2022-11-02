@@ -67,6 +67,7 @@ namespace FunProject.Persistence
             _ = services.AddTransient<IOrderIsExistsByCustomerIdQuery, OrderIsExistsByCustomerIdQuery>();
             _ = services.AddTransient<IOrderIsExistsByProductIdQuery, OrderIsExistsByProductIdQuery>();
             _ = services.AddTransient<IOrdersByFiltersQuery, OrdersByFiltersQuery>();
+            _ = services.AddTransient<ITotalMonthlyOrdersByYearQuery, TotalMonthlyOrdersByYearQuery>();
 
             //ActivityLog
             _ = services.AddTransient<IAllActivityLogsQuery, AllActivityLogsQuery>();

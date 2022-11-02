@@ -16,8 +16,9 @@ namespace FunProject.Application.OrdersModule.Services
         private readonly IGetOrderByIdWorkFlow _getOrderByIdWorkFlow;
         private readonly IUpdateOrderWorkFlow _updateOrderWorkFlow;
         private readonly IGetOrdersByFiltersAsExcelWorkFlow _getOrdersByFiltersAsExcelWorkFlow;
+        private readonly IGetTotalMonthlyOrdersByYearWorkFlow _getTotalMonthlyOrdersByYearWorkFlow;
 
-        public OrdersService(IGetOrdersByFiltersWorkFlow getOrdersByFiltersWorkFlow, ICreateOrderWorkFlow createOrderWorkFlow, IDeleteOrderWorkFlow deleteOrderWorkFlow, IGetOrderByIdWorkFlow getOrderByIdWorkFlow, IUpdateOrderWorkFlow updateOrderWorkFlow, IGetOrdersByFiltersAsExcelWorkFlow getOrdersByFiltersAsExcelWorkFlow)
+        public OrdersService(IGetOrdersByFiltersWorkFlow getOrdersByFiltersWorkFlow, ICreateOrderWorkFlow createOrderWorkFlow, IDeleteOrderWorkFlow deleteOrderWorkFlow, IGetOrderByIdWorkFlow getOrderByIdWorkFlow, IUpdateOrderWorkFlow updateOrderWorkFlow, IGetOrdersByFiltersAsExcelWorkFlow getOrdersByFiltersAsExcelWorkFlow, IGetTotalMonthlyOrdersByYearWorkFlow getTotalMonthlyOrdersByYearWorkFlow)
         {
             _getOrdersByFiltersWorkFlow = getOrdersByFiltersWorkFlow;
             _createOrderWorkFlow = createOrderWorkFlow;
@@ -25,6 +26,7 @@ namespace FunProject.Application.OrdersModule.Services
             _getOrderByIdWorkFlow = getOrderByIdWorkFlow;
             _updateOrderWorkFlow = updateOrderWorkFlow;
             _getOrdersByFiltersAsExcelWorkFlow = getOrdersByFiltersAsExcelWorkFlow;
+            _getTotalMonthlyOrdersByYearWorkFlow = getTotalMonthlyOrdersByYearWorkFlow;
         }
 
         public IList<OrderDto> GetOrdersByFilters(OrderFiltersValuesModel filtersValues)
@@ -55,6 +57,11 @@ namespace FunProject.Application.OrdersModule.Services
         public MemoryStream GetOrdersByFiltersAsExcel(OrderFiltersValuesModel filtersValues)
         {
             return _getOrdersByFiltersAsExcelWorkFlow.Get(filtersValues);
+        }
+
+        public List<TotalMonthlyOrdersModel> GetTotalMonthlyOrdersByYear(int year)
+        {
+            return _getTotalMonthlyOrdersByYearWorkFlow.Get(year);
         }
     }
 }

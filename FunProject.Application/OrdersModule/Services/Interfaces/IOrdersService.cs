@@ -14,5 +14,6 @@ namespace FunProject.Application.OrdersModule.Services.Interfaces
         ActionStatusModel CreateOrder(OrderDto order);
         ActionStatusModel UpdateOrder(OrderDto order);
         ActionStatusModel DeleteOrder(int id);
+        List<TotalMonthlyOrdersModel> GetTotalMonthlyOrdersByYear(int year);
     }
 }

@@ -113,6 +113,7 @@ namespace FunProject.Infrastructure
             _ = services.AddTransient<IGetProductsByIdsTask, GetProductsByIdsTask>();
             _ = services.AddTransient<IGetAllOrderQueryPlginsTask, GetAllOrderQueryPlginsTask>();
             _ = services.AddTransient<IMergeProductsOrdersIdsTask, MergeProductsOrdersIdsTask>();
+            _ = services.AddTransient<IGetTotalMonthlyOrdersByYearTask, GetTotalMonthlyOrdersByYearTask>();
 
 
             //application work flows 
@@ -146,6 +147,7 @@ namespace FunProject.Infrastructure
             _ = services.AddTransient<IOrderPaymentCalculationWorkFlow, OrderPaymentCalculationWorkFlow>();
             _ = services.AddTransient<IGetOrdersByFiltersWorkFlow, GetOrdersByFiltersWorkFlow>();
             _ = services.AddTransient<IGetOrdersByFiltersAsExcelWorkFlow, GetOrdersByFiltersAsExcelWorkFlow>();
+            _ = services.AddTransient<IGetTotalMonthlyOrdersByYearWorkFlow, GetTotalMonthlyOrdersByYearWorkFlow>();
 
 
 

@@ -41,6 +41,12 @@ namespace FunProject.API.Controllers
             return _ordersService.GetOrder(id);
         }
 
+        [HttpGet("{year}")]
+        public List<TotalMonthlyOrdersModel> GetTotalMonthlyOrdersByYear(int year)
+        {
+            return _ordersService.GetTotalMonthlyOrdersByYear(year);
+        }
+
         // POST api/<OrderController>
         [HttpPost]
         public ActionStatusModel CreateOrder([FromBody] OrderDto order)
